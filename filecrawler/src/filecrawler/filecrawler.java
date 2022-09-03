@@ -14,32 +14,32 @@ public class filecrawler {
 			input.close();
 		} 
 	
-		String src = ("./");
+		String src = "./";
 		checkFiles(src, enteredWord.toLowerCase());
 	}
 	
-	public static void checkFiles(String src, String check) {
+	public static void checkFiles(String src, String enteredWord) {
 		File[] listOfFiles = new File(src).listFiles();
 
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
 		    	String filePath = (file.getAbsolutePath());
-		    	readFile(filePath, check);
+		    	readFile(filePath, enteredWord);
 		    } else if (file.isDirectory()) {
 		    	src = (file.getAbsolutePath());
-		    	checkFiles(src, check);
+		    	checkFiles(src, enteredWord);
 		    } 
 		}
 	} 
 	
-	private static void readFile(String filePath, String check) {
+	private static void readFile(String filePath, String enteredWord) {
 		File file = new File(filePath);
 		
 		try (Scanner reader = new Scanner(file)) {
 			while (reader.hasNext()) {
 				String data = reader.nextLine().toLowerCase();
 			
-				if(data.contains(check)) {
+				if(data.contains(enteredWord)) {
 					System.out.println("Your word is available at: " + filePath);
 				} 
 			}
